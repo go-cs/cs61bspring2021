@@ -10,7 +10,7 @@ public class IntListExercises {
      */
     public static void addConstant(IntList lst, int c) {
         IntList head = lst;
-        while (head.rest != null) {
+        while (head != null) { //此处应该是head而不是head.rest
             head.first += c;
             head = head.rest;
         }
@@ -51,7 +51,7 @@ public class IntListExercises {
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
         int lastDigit = x % 10;
-        while (x > 10) {
+        while (x >= 10) { //x>10修改为x>=10，特殊情况10没有考虑
             x = x / 10;
         }
         int firstDigit = x % 10;
@@ -77,6 +77,9 @@ public class IntListExercises {
             lst.first *= lst.first;
         }
 
-        return currElemIsPrime || squarePrimes(lst.rest);
+        //这句话有问题，一旦currElemIsPrime=true，整个函数就返回true，列表后边元素就不再计算了
+        //return currElemIsPrime ||  squarePrimes(lst.rest);
+
+        return squarePrimes(lst.rest) || currElemIsPrime;//调换一下顺序就可以了
     }
 }
