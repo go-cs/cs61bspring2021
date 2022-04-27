@@ -16,8 +16,8 @@ public class ArrayDeque<Item> {
     }
     /**Return true if the list is full.*/
     private boolean isFull() {
-        //if (size== items.length) {
-        if (nextFirst==nextLast) {
+        if (size== items.length) {
+        //if (nextFirst==nextLast) {
             return true;
         }
         return false;
@@ -105,21 +105,59 @@ public class ArrayDeque<Item> {
     }
     /**Gets the item at the given index.*/
     public Item get(int index) {
+        if (index<0||index>length-1) {
+            return null;
+        }
         int i = getIndex(index+ length)% length;
         return items[i];
 
     }
-    public Iterator<String> iterator() {
-        ArrayDeque ad = new ArrayDeque();
-        Iterator<String> iterator = ad.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-        return iterator;
+    public Iterator<Item> iterator() {
+
+        return new ArrayDequeIterator();
 
     }
+
+    private class ArrayDequeIterator implements Iterator<Item>{
+        private int index;
+
+        private ArrayDequeIterator() {
+            index=0;
+        }
+
+        public boolean hasNext() {
+            return index <size;
+        }
+        public Item next() {
+            Item item = get(index);
+            index+=1;
+            return item;
+        }
+
+    }
+
+
+
+
     /**Return weather or not object o is equal to this deque.*/
     public boolean equals(Object o) {
-        return o instanceof deque.ArrayDeque;
+        if (o==null) {
+            return false;
+        }
+        if (o==this) {
+            return true;
+        }
+        if (!(o instanceof ArrayDeque)) {
+            return false;
+        }
+        if (((ArrayDeque<?>) o).size != this.size()) {
+            return false;
+        }
+        for (int i = 0;i < size;i++) {
+            if (((ArrayDeque<?>) o).get(i)!=get(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

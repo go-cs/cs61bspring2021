@@ -88,16 +88,16 @@ public class ArrayDequeTest {
             ad.addLast(i);
         }
         int n = 16;
-        while (n>=0) {
+        while (n>0) {
             ad.removeLast();
             n--;
         }
-        assertEquals("Should be 5",4,ad.size());
+        assertEquals("Should be 4",4,ad.size());
         assertEquals("Should be 16",16,ad.length);
 
     }
     @Test
-    public void lecTest() {
+    public void addRemoveGetResizeTest() {
         ArrayDeque<String> ad = new ArrayDeque<>();
         assertTrue("should be empty", ad.isEmpty());
         ad.addLast("a");
@@ -111,4 +111,19 @@ public class ArrayDequeTest {
         ad.addLast("f");
         assertEquals("e",ad.get(0));
     }
+    @Test
+    public void iteratorTest() {
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+
+        for (int i = 0;i<20;i++) {
+            ad.addLast(i);
+        }
+        int index=0;
+        for (int item : ad) {
+            assertEquals("Should be equal",item,index);
+            index+=1;
+        }
+    }
+
+
 }
