@@ -2,7 +2,7 @@ package deque;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import deque.ArrayDeque;
+
 public class ArrayDequeTest {
     @Test
     public void testIsEmpty() {
@@ -97,6 +97,7 @@ public class ArrayDequeTest {
 
     }
     @Test
+    /**此测试需要nextFirst=4，nextLast=5*/
     public void addRemoveGetResizeTest() {
         ArrayDeque<String> ad = new ArrayDeque<>();
         assertTrue("should be empty", ad.isEmpty());
@@ -112,7 +113,9 @@ public class ArrayDequeTest {
         assertEquals("e",ad.get(0));
     }
     @Test
+    //此段测试需要nextFirst=7,naxtLast=0
     public void iteratorTest() {
+
         ArrayDeque<Integer> ad = new ArrayDeque<>();
 
         for (int i = 0;i<20;i++) {
@@ -120,10 +123,9 @@ public class ArrayDequeTest {
         }
         int index=0;
         for (int item : ad) {
-            assertEquals("Should be equal",item,index);
+            assertEquals("Should be equal",index,item);
             index+=1;
         }
     }
-
 
 }

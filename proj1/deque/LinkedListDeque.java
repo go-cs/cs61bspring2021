@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T>{
     int size;
     private class Node {
         Node prev;
@@ -22,6 +22,7 @@ public class LinkedListDeque<T> {
         sentinel.next=sentinel;
     }
     /**Add an item in the front of the list.*/
+    @Override
     public void addFirst(T item) {
         size+=1;
         Node p = new Node(sentinel,item,sentinel.next);
@@ -29,6 +30,7 @@ public class LinkedListDeque<T> {
         sentinel.next = p;
     }
     /**Add an item in the end of the list.*/
+    @Override
     public void addLast(T item) {
         size+=1;
         Node q=new Node(sentinel.prev,item,sentinel);
@@ -36,19 +38,13 @@ public class LinkedListDeque<T> {
         sentinel.prev=q;
     }
 
-    /**Retuen True if deque is empty.*/
-    public boolean isEmpty() {
-        if (sentinel.next==sentinel&&sentinel.prev==sentinel) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     /**Return the length of deque*/
+    @Override
     public int size() {
         return size;
     }
     /**Prints the items in the deque from front to end.*/
+    @Override
     public void printDeque() {
         if(!isEmpty()) {
             Node p = sentinel.next;
@@ -60,6 +56,7 @@ public class LinkedListDeque<T> {
         }
     }
     /**Removes and return the item at the front of the deque.*/
+    @Override
     public T removeFirst() {
         T temp = null;
         if (!isEmpty()) {
@@ -72,6 +69,7 @@ public class LinkedListDeque<T> {
         return temp;
     }
     /**Removes and return the item at the end of the deque.*/
+    @Override
     public T removeLast() {
         T temp = null;
         if (!isEmpty()) {
@@ -84,6 +82,7 @@ public class LinkedListDeque<T> {
         return temp;
     }
     /**Gets the item at the given index.*/
+    @Override
     public T get(int index) {
         Node p = sentinel.next;
         index = index % size;
@@ -96,9 +95,10 @@ public class LinkedListDeque<T> {
         return temp;
     }
     /**Return an iterator.*/
-    public Iterator<Integer> iterator() {
+    @Override
+    public Iterator<T> iterator() {
         LinkedListDeque ls = new LinkedListDeque();
-        Iterator<Integer> iterator = ls.iterator();
+        Iterator<T> iterator = ls.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
@@ -106,6 +106,7 @@ public class LinkedListDeque<T> {
 
     }
     /**Return weather or not object o is equal to this deque.*/
+    @Override
     public boolean equals(Object o) {
         return o instanceof deque.LinkedListDeque;
     }

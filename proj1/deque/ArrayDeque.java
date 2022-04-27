@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Iterable<T>,Deque<T>{
     private int size;
     public int length;
     private T[] items = (T[]) new Object[8];
@@ -39,6 +39,7 @@ public class ArrayDeque<T> {
 
     }
     /**Add an item in the front of the list.*/
+    @Override
     public void addFirst(T item) {
         if (isFull()) {
             resize(length*2);
@@ -49,6 +50,7 @@ public class ArrayDeque<T> {
 
     }
     /**Add an item in the end of the list.*/
+    @Override
     public void addLast(T item) {
         if (isFull()) {
             resize(length*2);
@@ -58,16 +60,13 @@ public class ArrayDeque<T> {
         nextLast=getIndex(nextLast+1);
     }
 
-    /**RetuRn True if deque is empty.*/
-    public boolean isEmpty() {
-        return size==0;
-
-    }
     /**Return the length of deque*/
+    @Override
     public int size() {
         return size;
     }
     /**Prints the items in the deque from front to end.*/
+    @Override
     public void printDeque() {
         for (int i = 0; i < items.length; i++) {
             System.out.print(items[i]+" ");
@@ -75,6 +74,7 @@ public class ArrayDeque<T> {
         System.out.println();
     }
     /**Removes and return the item at the front of the deque.*/
+    @Override
     public T removeFirst() {
         int i = getIndex(nextFirst+1);
         T result = items[i];
@@ -89,6 +89,7 @@ public class ArrayDeque<T> {
         return result;
     }
     /**Removes and return the item at the end of the deque.*/
+    @Override
     public T removeLast() {
         int i = getIndex(nextLast-1);
         T result = items[i];
@@ -104,15 +105,18 @@ public class ArrayDeque<T> {
 
     }
     /**Gets the item at the given index.*/
+    @Override
     public T get(int index) {
         if (index<0||index>length-1) {
             return null;
         }
         //int i = getIndex(index+ length)% length;
         int i = (nextFirst+1+index)%length;
+        //int i = nextFirst+1+index;
         return items[i];
 
     }
+    @Override
     public Iterator<T> iterator() {
 
         return new ArrayDequeIterator();
@@ -122,13 +126,14 @@ public class ArrayDeque<T> {
     private class ArrayDequeIterator implements Iterator<T>{
         private int index;
 
-        private ArrayDequeIterator() {
+        ArrayDequeIterator() {
             index=0;
         }
-
+        @Override
         public boolean hasNext() {
-            return index <size;
+            return index < size;
         }
+        @Override
         public T next() {
             T item = get(index);
             index+=1;
@@ -141,6 +146,7 @@ public class ArrayDeque<T> {
 
 
     /**Return weather or not object o is equal to this deque.*/
+    @Override
     public boolean equals(Object o) {
         if (o==null) {
             return false;
@@ -162,3 +168,6 @@ public class ArrayDeque<T> {
         return true;
     }
 }
+
+
+
