@@ -2,13 +2,13 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<Items> {
+public class LinkedListDeque<T> {
     int size;
     private class Node {
         Node prev;
-        Items item;
+        T item;
         Node next;
-        private Node(Node p,Items i,Node n) {
+        private Node(Node p,T i,Node n) {
             prev = p;
             item = i;
             next = n;
@@ -22,14 +22,14 @@ public class LinkedListDeque<Items> {
         sentinel.next=sentinel;
     }
     /**Add an item in the front of the list.*/
-    public void addFirst(Items item) {
+    public void addFirst(T item) {
         size+=1;
         Node p = new Node(sentinel,item,sentinel.next);
         sentinel.next.prev = p;
         sentinel.next = p;
     }
     /**Add an item in the end of the list.*/
-    public void addLast(Items item) {
+    public void addLast(T item) {
         size+=1;
         Node q=new Node(sentinel.prev,item,sentinel);
         sentinel.prev.next = q;
@@ -60,8 +60,8 @@ public class LinkedListDeque<Items> {
         }
     }
     /**Removes and return the item at the front of the deque.*/
-    public Items removeFirst() {
-        Items temp = null;
+    public T removeFirst() {
+        T temp = null;
         if (!isEmpty()) {
             size-=1;
             temp = sentinel.next.item;
@@ -72,8 +72,8 @@ public class LinkedListDeque<Items> {
         return temp;
     }
     /**Removes and return the item at the end of the deque.*/
-    public Items removeLast() {
-        Items temp = null;
+    public T removeLast() {
+        T temp = null;
         if (!isEmpty()) {
             size-=1;
             temp = sentinel.prev.item;
@@ -84,10 +84,10 @@ public class LinkedListDeque<Items> {
         return temp;
     }
     /**Gets the item at the given index.*/
-    public Items get(int index) {
+    public T get(int index) {
         Node p = sentinel.next;
         index = index % size;
-        Items temp = null;
+        T temp = null;
         while (p!=sentinel&&index>0) {
             temp = p.item;
             p=p.next;

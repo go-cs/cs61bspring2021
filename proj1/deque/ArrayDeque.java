@@ -2,15 +2,15 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Item> {
+public class ArrayDeque<T> {
     private int size;
     public int length;
-    private Item[] items = (Item[]) new Object[8];
+    private T[] items = (T[]) new Object[8];
     private int nextFirst = 4;
     private int nextLast = 5;
     /**Create an empty list.*/
     public ArrayDeque() {
-        //Item[] items = (Item[]) new Object[8];
+        //T[] items = (T[]) new Object[8];
         length = 8;
         size=0;
     }
@@ -28,7 +28,7 @@ public class ArrayDeque<Item> {
 
     /**Resize the list.*/
     private void resize(int capacity) {
-        Item[] a = (Item[]) new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
         for (int i = 0;i<size;i++) {
             a[i] = items[i];
         }
@@ -39,7 +39,7 @@ public class ArrayDeque<Item> {
 
     }
     /**Add an item in the front of the list.*/
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
         if (isFull()) {
             resize(length*2);
         }
@@ -49,7 +49,7 @@ public class ArrayDeque<Item> {
 
     }
     /**Add an item in the end of the list.*/
-    public void addLast(Item item) {
+    public void addLast(T item) {
         if (isFull()) {
             resize(length*2);
         }
@@ -58,7 +58,7 @@ public class ArrayDeque<Item> {
         nextLast=getIndex(nextLast+1);
     }
 
-    /**Retuen True if deque is empty.*/
+    /**RetuRn True if deque is empty.*/
     public boolean isEmpty() {
         return size==0;
 
@@ -75,9 +75,9 @@ public class ArrayDeque<Item> {
         System.out.println();
     }
     /**Removes and return the item at the front of the deque.*/
-    public Item removeFirst() {
+    public T removeFirst() {
         int i = getIndex(nextFirst+1);
-        Item result = items[i];
+        T result = items[i];
         if (result!=null) {
             nextFirst=i;
             items[i]=null;
@@ -89,9 +89,9 @@ public class ArrayDeque<Item> {
         return result;
     }
     /**Removes and return the item at the end of the deque.*/
-    public Item removeLast() {
+    public T removeLast() {
         int i = getIndex(nextLast-1);
-        Item result = items[i];
+        T result = items[i];
         if (result!=null) {
             nextLast=i;
             items[i]=null;
@@ -104,21 +104,22 @@ public class ArrayDeque<Item> {
 
     }
     /**Gets the item at the given index.*/
-    public Item get(int index) {
+    public T get(int index) {
         if (index<0||index>length-1) {
             return null;
         }
-        int i = getIndex(index+ length)% length;
+        //int i = getIndex(index+ length)% length;
+        int i = (nextFirst+1+index)%length;
         return items[i];
 
     }
-    public Iterator<Item> iterator() {
+    public Iterator<T> iterator() {
 
         return new ArrayDequeIterator();
 
     }
 
-    private class ArrayDequeIterator implements Iterator<Item>{
+    private class ArrayDequeIterator implements Iterator<T>{
         private int index;
 
         private ArrayDequeIterator() {
@@ -128,8 +129,8 @@ public class ArrayDeque<Item> {
         public boolean hasNext() {
             return index <size;
         }
-        public Item next() {
-            Item item = get(index);
+        public T next() {
+            T item = get(index);
             index+=1;
             return item;
         }
