@@ -126,30 +126,25 @@ public class LinkedListDeque<T> implements Deque<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        LinkedListDeque ls = new LinkedListDeque();
-        Iterator<T> iterator = ls.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-        return iterator;
+        return new LinkedListDequeIterator();
 
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {
         private int index;
+        private Node p;
 
-        private LinkedListDequeIterator() {
-            index = 0;
+        LinkedListDequeIterator() {
+            p = sentinel.next;
         }
 
-        @Override
         public boolean hasNext() {
-            return index < size;
+            return p == sentinel;
         }
 
         public T next() {
-            T item = get(index);
-            index += 1;
+            T item = p.item;
+            p = p.next;
             return item;
         }
     }
