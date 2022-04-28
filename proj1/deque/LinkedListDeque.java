@@ -121,6 +121,21 @@ public class LinkedListDeque<T> implements Deque<T> {
         return temp;
     }
 
+    public T getRecursive(int index) {
+        if (index < 0 || index > size - 1) {
+            return null;
+        }
+        return getRecursiveHelper(index, sentinel.next);
+
+    }
+
+    private T getRecursiveHelper(int index, Node current) {
+        if (index == 0) {
+            return current.item;
+        }
+        return getRecursiveHelper(index - 1, current.next);
+    }
+
     /**
      * Return an iterator.
      */
@@ -131,7 +146,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {
-        private int index;
+        //private int index;
         private Node p;
 
         LinkedListDequeIterator() {
