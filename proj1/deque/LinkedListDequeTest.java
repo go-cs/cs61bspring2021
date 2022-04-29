@@ -2,6 +2,8 @@ package deque;
 
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 
@@ -14,7 +16,8 @@ public class LinkedListDequeTest {
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
      * finally printing the results.
      *
-     * && is the "and" operation. */ public void addIsEmptySizeTest() {
+     * && is the "and" operation. */
+    public void addIsEmptySizeTest() {
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
@@ -40,7 +43,8 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */ public void addRemoveTest() {
+    /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+    public void addRemoveTest() {
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
@@ -59,7 +63,8 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    /* Tests removing from an empty deque */ public void removeEmptyTest() {
+    /* Tests removing from an empty deque */
+    public void removeEmptyTest() {
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
@@ -130,6 +135,19 @@ public class LinkedListDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+
+
+    }
+    @Test
+    public void getTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addLast(0);
+        assertEquals(0, (int)lld1.removeLast());
+        lld1.addFirst(2);
+        //lld1.get(0);
+        //System.out.println(lld1.get(0));
+        assertEquals(2,(int)lld1.get(0));
+
 
 
     }
