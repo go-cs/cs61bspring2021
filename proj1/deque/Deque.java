@@ -44,8 +44,6 @@ public interface Deque<T> {
      */
     T get(int index);
 
-    Iterator<T> iterator();
-
 
     /**
      * Return weather or not object o is equal to this deque.

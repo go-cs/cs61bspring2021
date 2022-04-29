@@ -139,7 +139,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     /**
      * Return an iterator.
      */
-    @Override
+    
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
 
