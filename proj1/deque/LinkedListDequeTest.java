@@ -147,8 +147,37 @@ public class LinkedListDequeTest {
         //lld1.get(0);
         //System.out.println(lld1.get(0));
         assertEquals(2,(int)lld1.get(0));
+        assertEquals(0,(int)lld1.get(1));
 
 
 
+    }
+
+    @Test
+    public void addLastTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addLast(0);
+        lld1.addLast(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        assertEquals(3,(int)lld1.removeLast());
+        assertEquals(2,(int)lld1.removeLast());
+        assertEquals(1,(int)lld1.removeLast());
+        assertEquals(0,(int)lld1.removeLast());
+        assertTrue(lld1.isEmpty());
+    }
+
+    @Test
+    public void addFirstTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        lld1.addFirst(0);
+        lld1.addFirst(1);
+        lld1.addFirst(2);
+        lld1.addFirst(3);
+
+        assertEquals(0,(int)lld1.get(3));
+        assertEquals(1,(int)lld1.get(2));
+        assertEquals(2,(int)lld1.get(1));
+        assertEquals(3,(int)lld1.get(0));
     }
 }

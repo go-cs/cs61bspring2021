@@ -18,6 +18,15 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         size = 0;
     }
 
+    public ArrayDeque(T item) {
+        items[3] = item;
+        size = 1;
+        nextFirst = 2;
+        nextLast = 4;
+
+    }
+
+
     /**
      * Return true if the list is full.
      */
@@ -41,7 +50,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         System.arraycopy(items, nextFirst + 1, a, (capacity - size) / 2, size);
         length = capacity;
         items = a;
-        nextFirst = (capacity - size) / 2 - 1;
+        nextFirst = Math.abs(capacity - size) / 2 - 1;
         nextLast = nextFirst + size + 1;
 
     }
@@ -51,14 +60,14 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
      */
     @Override
     public void addFirst(T item) {
+        if (nextFirst < 0) {
+            resize(length * 2);
 
+        }
         size += 1;
         items[nextFirst] = item;
         nextFirst = nextFirst - 1;
-        if (nextFirst < 0) {
-            resize(size * 2);
 
-        }
 
     }
 
@@ -67,14 +76,14 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
      */
     @Override
     public void addLast(T item) {
+        if (nextLast == items.length) {
+            resize(length * 2);
 
+        }
         size += 1;
         items[nextLast] = item;
         nextLast = nextLast + 1;
-        if (nextLast == items.length) {
-            resize(size * 2);
 
-        }
     }
 
     /**
@@ -141,9 +150,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         if (index < 0 || index > length - 1) {
             return null;
         }
-        //int i = getIndex(index+ length)% length;
         int i = nextFirst + 1 + index;
-        //int i = nextFirst+1+index;
         return items[i];
 
     }
