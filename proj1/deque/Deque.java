@@ -44,12 +44,6 @@ public interface Deque<T> {
      */
     T get(int index);
 
-
-    /**
-     * Return weather or not object o is equal to this deque.
-     */
-    boolean equals(Object o);
-
     default boolean isEmpty() {
         return size() == 0;
     }
