@@ -17,7 +17,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         length = 8;
         size = 0;
     }
-    
+
 
     /**
      * Return true if the list is full.
