@@ -1,7 +1,5 @@
 package capers;
 
-import java.util.Arrays;
-
 import static capers.Utils.exitWithError;
 
 /**
@@ -42,7 +40,7 @@ public class Main {
         if (args.length == 0) {
             Utils.exitWithError("Must have at least one argument");
         }
-        System.out.println("args: " + Arrays.toString(args));
+        //System.out.println("args: " + Arrays.toString(args));
 
         CapersRepository.setupPersistence();
         String text;
@@ -56,15 +54,18 @@ public class Main {
             case "dog":
                 validateNumArgs("dog", args, 4);
                 // TODO: make a dog
+                text = args[1];
+                CapersRepository.makeDog(args[1], args[2], Integer.parseInt(args[3]));
                 break;
             case "birthday":
                 validateNumArgs("birthday", args, 2);
                 // TODO: celebrate this dog's birthday
+                CapersRepository.celebrateBirthday(args[1]);
                 break;
             default:
                 exitWithError(String.format("Unknown command: %s", args[0]));
         }
-        return;
+
     }
 
     /**
